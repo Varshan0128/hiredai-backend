@@ -1,0 +1,48 @@
+module_id,module_name,topic_title,content_summary,code_example,difficulty
+1,TypeScript Deep Dive,Basics,Introduces the fundamental building blocks of TypeScript such as variables, types, and functions.,"let message: string = 'Hello TypeScript';
+console.log(message);",Beginner
+2,TypeScript Deep Dive,Type System,Explains how TypeScript enforces types and helps prevent common runtime errors.,"let count: number = 10;
+let username: string = 'Varshan';",Beginner
+3,TypeScript Deep Dive,Interfaces and Types,Teaches how to define structured contracts for objects and enforce shape consistency.,"interface Person { name: string; age: number; }
+const user: Person = { name: 'Varshan', age: 21 };",Intermediate
+4,TypeScript Deep Dive,Functions,Shows how to declare functions with type annotations and handle optional parameters.,"function greet(name: string, age?: number): string {
+  return `Hello ${name}, age: ${age}`;
+}",Intermediate
+5,TypeScript Deep Dive,Generics,Explains how to create reusable components and functions that work with multiple types.,"function identity<T>(arg: T): T {
+  return arg;
+}
+console.log(identity<string>('Hello'));",Advanced
+6,TypeScript Deep Dive,Enums,Demonstrates how to represent sets of named constants for cleaner and more readable code.,"enum Direction { Up, Down, Left, Right }
+let move: Direction = Direction.Up;",Beginner
+7,TypeScript Deep Dive,Modules and Namespaces,Details how to organize code into modules for reusability and maintainability.,"// moduleA.ts
+export const add = (a: number, b: number) => a + b;
+// moduleB.ts
+import { add } from './moduleA';",Intermediate
+8,TypeScript Deep Dive,Decorators,Shows how decorators can enhance or modify classes and methods at runtime.,"function Logger(target: any) {
+  console.log('Logging:', target);
+}
+@Logger
+class Example {}",Advanced
+9,TypeScript Deep Dive,Type Guards,Explains how to safely check and narrow types using `typeof` and `instanceof`.,"function printId(id: number | string) {
+  if (typeof id === 'string') console.log(id.toUpperCase());
+  else console.log(id);
+}",Intermediate
+10,TypeScript Deep Dive,Advanced Types,Describes union, intersection, mapped, and conditional types for flexible design.,"type Status = 'loading' | 'success' | 'error';
+type User = { name: string } & { age: number };",Advanced
+11,TypeScript Deep Dive,Utility Types,Covers built-in helpers like Partial, Pick, and Record for faster type manipulation.,"interface Todo { title: string; desc: string; }
+type PartialTodo = Partial<Todo>;",Intermediate
+12,TypeScript Deep Dive,Asynchronous TypeScript,Explains how to use async/await and Promises safely with type support.,"async function fetchData(): Promise<string> {
+  return 'Fetched Data';
+}
+fetchData().then(console.log);",Advanced
+13,TypeScript Deep Dive,Error Handling,Shows best practices for type-safe exception handling.,"try {
+  throw new Error('Something went wrong');
+} catch (e) {
+  console.error((e as Error).message);
+}",Intermediate
+14,TypeScript Deep Dive,Type Narrowing,Shows how control flow affects type inference automatically.,"function padLeft(value: string, padding: string | number) {
+  if (typeof padding === 'number') return Array(padding + 1).join(' ') + value;
+  return padding + value;
+}",Intermediate
+15,TypeScript Deep Dive,Type Compatibility,Explains how structural typing allows flexible code interoperability.,"interface Named { name: string; }
+let person: Named = { name: 'Varshan' };",Intermediate

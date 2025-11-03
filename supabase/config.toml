@@ -1,0 +1,9 @@
+
+project_id = "gcioedwsnxomfjiqsitd"
+
+[functions.fetch-jobs]
+verify_jwt = false
+
+[functions.latex-compile]
+verify_jwt = false
+

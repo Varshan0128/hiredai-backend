@@ -1,0 +1,9 @@
+/* All imports must come first */
+@import './styles/base.css'; /* Assuming you have a base.css for initial resets */
+@import './styles/components.css'; /* For any custom component styles */
+@import './styles/animations.css'; /* For any custom animations */
+
+/* Tailwind goes after */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

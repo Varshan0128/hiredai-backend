@@ -1,0 +1,39 @@
+module_id,module_name,topic_title,content_summary,code_example,difficulty
+1,AWS Developer Basics,Introduction to AWS,Overview of AWS services, global infrastructure, and developer tools.,"# AWS CLI Setup
+aws configure
+aws s3 ls",Beginner
+2,AWS Developer Basics,Identity and Access Management (IAM),Understanding IAM users, groups, roles, and policies for secure access control.,"# Create IAM User
+aws iam create-user --user-name dev-user",Beginner
+3,Compute Services,EC2 Instances,Learn how to launch and manage EC2 instances for scalable compute.,"# Launch EC2 Instance
+aws ec2 run-instances --image-id ami-0abcdef1234567890 --instance-type t2.micro",Intermediate
+4,Compute Services,Lambda Functions,Build serverless functions using AWS Lambda and deploy automatically.,"import json
+
+def handler(event, context):
+    return { 'statusCode': 200, 'body': json.dumps('Hello from Lambda!') }",Intermediate
+5,Storage Services,Amazon S3,Learn how to store and retrieve objects in S3 buckets.,"# Create Bucket
+aws s3 mb s3://hiredai-learning-data",Beginner
+6,Database Services,DynamoDB,Understand how to use DynamoDB for NoSQL data storage and querying.,"# Create Table
+aws dynamodb create-table --table-name Users --key-schema AttributeName=UserId,KeyType=HASH",Intermediate
+7,API Integration,API Gateway,Build and deploy REST APIs using API Gateway with Lambda integrations.,"# Deploy API
+aws apigateway create-rest-api --name 'HiredAI API'",Intermediate
+8,Messaging Services,SNS and SQS,Implement asynchronous communication using SNS and SQS queues.,"# Publish SNS Message
+aws sns publish --topic-arn arn:aws:sns:us-east-1:123456789012:MyTopic --message 'Hello World!'",Advanced
+9,Monitoring and Logging,CloudWatch and X-Ray,Learn how to monitor application metrics and trace requests.,"# Create Log Group
+aws logs create-log-group --log-group-name hiredai-dev-logs",Intermediate
+10,Infrastructure as Code,CloudFormation,Automate AWS resource creation using YAML/JSON templates.,"Resources:
+  MyBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: hiredai-cloud-bucket",Advanced
+11,Application Deployment,AWS Elastic Beanstalk,Deploy scalable web apps using Beanstalk environments.,"# Deploy App
+eb init && eb create hiredai-env && eb deploy",Intermediate
+12,Containerization,ECS and ECR,Learn to build and deploy containers using ECS and ECR.,"# Build Docker Image
+docker build -t hiredai-app .
+# Push to ECR
+aws ecr create-repository --repository-name hiredai-app",Advanced
+13,Security and Encryption,KMS and Secrets Manager,Securely manage secrets, API keys, and encryption.,"# Encrypt Data
+aws kms encrypt --key-id alias/my-key --plaintext fileb://data.txt",Advanced
+14,Automation,CodeBuild and CodePipeline,Automate CI/CD workflows for AWS deployments.,"# Create Pipeline
+aws codepipeline create-pipeline --cli-input-json file://pipeline.json",Advanced
+15,Best Practices,Cost Optimization,Learn how to monitor and optimize AWS costs effectively.,"# Cost Explorer
+aws ce get-cost-and-usage --time-period Start=2025-10-01,End=2025-10-31",Intermediate

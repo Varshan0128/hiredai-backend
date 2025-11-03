@@ -1,0 +1,161 @@
+
+.glass-card {
+  @apply bg-white/90 dark:bg-card/90 backdrop-blur-xl border border-white/30 dark:border-white/10 shadow-2xl rounded-3xl;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  box-shadow: var(--glass-shadow);
+}
+
+.dark .glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+}
+
+.modern-card {
+  @apply bg-gradient-to-br from-card/95 to-card/80 border border-border/30 rounded-3xl 
+         shadow-lg hover:shadow-2xl backdrop-blur-md transition-all duration-500 
+         hover:border-primary/40 hover:scale-[1.02];
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.modern-card:hover {
+  box-shadow: 0 8px 32px rgba(155, 138, 251, 0.15);
+}
+
+.dark .modern-card:hover {
+  box-shadow: 0 8px 32px rgba(255, 111, 97, 0.15);
+}
+
+.neumorphic-card {
+  @apply bg-background rounded-3xl transition-all duration-300;
+  box-shadow: var(--neumorphic-light);
+}
+
+.dark .neumorphic-card {
+  box-shadow: var(--neumorphic-dark);
+}
+
+.gradient-card {
+  @apply bg-gradient-to-br from-white via-accent/10 to-sage/10 dark:from-card dark:via-accent/10 dark:to-sage/10 border border-border rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300;
+}
+
+.feature-card {
+  @apply modern-card p-8 hover:scale-[1.02] transition-all duration-300 hover:shadow-xl;
+}
+
+.stat-card {
+  @apply gradient-card p-8 text-center hover:scale-[1.02] transition-all duration-300;
+}
+
+.action-card {
+  @apply modern-card p-6 cursor-pointer hover:border-primary/50 hover:shadow-lg transition-all duration-300;
+}
+
+.section-header {
+  @apply flex items-center justify-between mb-8;
+}
+
+.section-title {
+  @apply text-2xl font-semibold text-foreground flex items-center gap-3;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-primary via-accent to-sage bg-clip-text text-transparent;
+}
+
+.text-gradient-coral {
+  @apply bg-gradient-to-r from-coral via-primary to-accent bg-clip-text text-transparent;
+}
+
+.subtle-shadow {
+  box-shadow: 0 4px 20px rgba(124, 93, 250, 0.08);
+}
+
+.soft-shadow {
+  box-shadow: 0 8px 30px rgba(124, 93, 250, 0.12);
+}
+
+.badge-success {
+  @apply inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-sage/20 text-sage-foreground border border-sage/30;
+}
+
+.badge-warning {
+  @apply inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-coral/20 text-coral-foreground border border-coral/30;
+}
+
+.badge-info {
+  @apply inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-accent/20 text-accent-foreground border border-accent/30;
+}
+
+.nav-item {
+  @apply flex items-center gap-3 px-4 py-3 rounded-xl text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-all duration-200;
+}
+
+.nav-item-active {
+  @apply nav-item bg-primary/10 text-primary border border-primary/20 shadow-sm;
+}
+
+.form-section {
+  @apply modern-card p-8 space-y-6;
+}
+
+.dashboard-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+}
+
+.step-flow {
+  @apply space-y-8;
+}
+
+.floating-action {
+  @apply fixed bottom-8 right-8 z-50 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground p-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 backdrop-blur-sm;
+}
+
+/* Enhanced micro-interactions */
+.interactive-card {
+  @apply transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer;
+}
+
+.pulse-glow {
+  @apply animate-pulse;
+  box-shadow: 0 0 20px rgba(124, 93, 250, 0.3);
+}
+
+  /* Enhanced glassmorphism and style updates */
+  .text-gradient-lavender {
+    @apply bg-gradient-to-r from-lavender via-primary to-accent bg-clip-text text-transparent;
+  }
+
+  .floating-resume {
+    @apply animate-float-gentle;
+  }
+
+  .shimmer-effect {
+    background-image: var(--shimmer);
+    background-size: 1000px 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }

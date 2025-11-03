@@ -1,0 +1,83 @@
+[
+    {
+      "module_id": 1,
+      "module_name": "Advanced React Patterns",
+      "topic_title": "Compound Components",
+      "content_summary": "Allows multiple components to work together as one cohesive unit. Useful for building flexible reusable APIs.",
+      "code_example": "function Toggle({children}) {\n  const [on, setOn] = React.useState(false);\n  const toggle = () => setOn(!on);\n  return React.Children.map(children, child => React.cloneElement(child, { on, toggle }));\n}",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 2,
+      "module_name": "Advanced React Patterns",
+      "topic_title": "Controlled Props",
+      "content_summary": "Provides full control of internal state via props. Helps integrate controlled and uncontrolled inputs.",
+      "code_example": "function Counter({count: controlledCount, onChange}) {\n  const [uncontrolledCount, setCount] = React.useState(0);\n  const isControlled = controlledCount != null;\n  const count = isControlled ? controlledCount : uncontrolledCount;\n  const increment = () => {\n    if (isControlled) onChange(count + 1);\n    else setCount(count + 1);\n  };\n  return <button onClick={increment}>{count}</button>;\n}",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 3,
+      "module_name": "Advanced React Patterns",
+      "topic_title": "Custom Hooks",
+      "content_summary": "Encapsulates reusable stateful logic across components to improve reusability and clarity.",
+      "code_example": "function useToggle(initial = false) {\n  const [on, setOn] = React.useState(initial);\n  const toggle = () => setOn(o => !o);\n  return {on, toggle};\n}",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 4,
+      "module_name": "Advanced React Patterns",
+      "topic_title": "State Reducer Pattern",
+      "content_summary": "Enables users to control internal logic of a hook or component by intercepting state transitions.",
+      "code_example": "function useToggleReducer(reducer, initialState = false) {\n  const [state, dispatch] = React.useReducer(reducer, initialState);\n  return {on: state, toggle: () => dispatch({type: 'toggle'})};\n}",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 5,
+      "module_name": "Advanced React Patterns",
+      "topic_title": "Context Module Functions",
+      "content_summary": "Simplifies sharing global state logic via functions rather than exposing full context objects.",
+      "code_example": "const ThemeContext = React.createContext();\nexport function useTheme() { return React.useContext(ThemeContext); }",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 6,
+      "module_name": "Advanced React Patterns",
+      "topic_title": "Prop Collections and Getters",
+      "content_summary": "Aggregates multiple prop handlers and returns a single getter for reusable logic like getToggleProps.",
+      "code_example": "function useToggle() {\n  const [on, setOn] = React.useState(false);\n  const getToggleProps = ({onClick, ...props} = {}) => ({\n    onClick: () => { setOn(!on); onClick?.(); },\n    'aria-pressed': on,\n    ...props\n  });\n  return {on, getToggleProps};\n}",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 7,
+      "module_name": "Advanced React Patterns",
+      "topic_title": "Control Props with Refs",
+      "content_summary": "Demonstrates how to expose component APIs to parent components via refs using forwardRef.",
+      "code_example": "const Input = React.forwardRef((props, ref) => (\n  <input ref={ref} {...props} />\n));",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 8,
+      "module_name": "Advanced React Patterns",
+      "topic_title": "Provider Pattern",
+      "content_summary": "Uses React Context Provider to pass data deeply through the tree without prop drilling.",
+      "code_example": "const ThemeContext = React.createContext();\nfunction ThemeProvider({children}) {\n  const [theme, setTheme] = React.useState('light');\n  return <ThemeContext.Provider value={{theme, setTheme}}>{children}</ThemeContext.Provider>;\n}",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 9,
+      "module_name": "Advanced React Patterns",
+      "topic_title": "Render Props",
+      "content_summary": "Uses function-as-children to share code between components dynamically.",
+      "code_example": "function Mouse({children}) {\n  const [pos, setPos] = React.useState({x: 0, y: 0});\n  return <div onMouseMove={e => setPos({x: e.clientX, y: e.clientY})}>{children(pos)}</div>;\n}",
+      "difficulty": "Beginner"
+    },
+    {
+      "module_id": 10,
+      "module_name": "Advanced React Patterns",
+      "topic_title": "Higher Order Components (HOC)",
+      "content_summary": "Wraps components to inject new props or logic for cross-cutting concerns like auth or analytics.",
+      "code_example": "function withLogger(Wrapped) {\n  return props => {\n    console.log('Render', Wrapped.name);\n    return <Wrapped {...props} />;\n  };\n}",
+      "difficulty": "Intermediate"
+    }
+  ]
+  

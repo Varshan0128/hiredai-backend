@@ -1,0 +1,123 @@
+[
+    {
+      "module_id": 1,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Basics",
+      "content_summary": "Introduces the fundamental building blocks of TypeScript such as variables, types, and functions.",
+      "code_example": "let message: string = 'Hello TypeScript';\nconsole.log(message);",
+      "difficulty": "Beginner"
+    },
+    {
+      "module_id": 2,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Type System",
+      "content_summary": "Explains how TypeScript enforces types and helps prevent common runtime errors.",
+      "code_example": "let count: number = 10;\nlet username: string = 'Varshan';",
+      "difficulty": "Beginner"
+    },
+    {
+      "module_id": 3,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Interfaces and Types",
+      "content_summary": "Teaches how to define structured contracts for objects and enforce shape consistency.",
+      "code_example": "interface Person { name: string; age: number; }\nconst user: Person = { name: 'Varshan', age: 21 };",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 4,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Functions",
+      "content_summary": "Shows how to declare functions with type annotations and handle optional parameters.",
+      "code_example": "function greet(name: string, age?: number): string {\n  return `Hello ${name}, age: ${age}`;\n}",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 5,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Generics",
+      "content_summary": "Explains how to create reusable components and functions that work with multiple types.",
+      "code_example": "function identity<T>(arg: T): T {\n  return arg;\n}\nconsole.log(identity<string>('Hello'));",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 6,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Enums",
+      "content_summary": "Demonstrates how to represent sets of named constants for cleaner and more readable code.",
+      "code_example": "enum Direction { Up, Down, Left, Right }\nlet move: Direction = Direction.Up;",
+      "difficulty": "Beginner"
+    },
+    {
+      "module_id": 7,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Modules and Namespaces",
+      "content_summary": "Details how to organize code into modules for reusability and maintainability.",
+      "code_example": "// moduleA.ts\nexport const add = (a: number, b: number) => a + b;\n// moduleB.ts\nimport { add } from './moduleA';",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 8,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Decorators",
+      "content_summary": "Shows how decorators can enhance or modify classes and methods at runtime.",
+      "code_example": "function Logger(target: any) {\n  console.log('Logging:', target);\n}\n@Logger\nclass Example {}",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 9,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Type Guards",
+      "content_summary": "Explains how to safely check and narrow types using typeof and instanceof.",
+      "code_example": "function printId(id: number | string) {\n  if (typeof id === 'string') console.log(id.toUpperCase());\n  else console.log(id);\n}",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 10,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Advanced Types",
+      "content_summary": "Describes union, intersection, mapped, and conditional types for flexible design.",
+      "code_example": "type Status = 'loading' | 'success' | 'error';\ntype User = { name: string } & { age: number };",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 11,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Utility Types",
+      "content_summary": "Covers built-in helpers like Partial, Pick, and Record for faster type manipulation.",
+      "code_example": "interface Todo { title: string; desc: string; }\ntype PartialTodo = Partial<Todo>;",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 12,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Asynchronous TypeScript",
+      "content_summary": "Explains how to use async/await and Promises safely with type support.",
+      "code_example": "async function fetchData(): Promise<string> {\n  return 'Fetched Data';\n}\nfetchData().then(console.log);",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 13,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Error Handling",
+      "content_summary": "Shows best practices for type-safe exception handling.",
+      "code_example": "try {\n  throw new Error('Something went wrong');\n} catch (e) {\n  console.error((e as Error).message);\n}",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 14,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Type Narrowing",
+      "content_summary": "Shows how control flow affects type inference automatically.",
+      "code_example": "function padLeft(value: string, padding: string | number) {\n  if (typeof padding === 'number') return Array(padding + 1).join(' ') + value;\n  return padding + value;\n}",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 15,
+      "module_name": "TypeScript Deep Dive",
+      "topic_title": "Type Compatibility",
+      "content_summary": "Explains how structural typing allows flexible code interoperability.",
+      "code_example": "interface Named { name: string; }\nlet person: Named = { name: 'Varshan' };",
+      "difficulty": "Intermediate"
+    }
+  ]
+  

@@ -1,0 +1,5 @@
+C:\Users\THUTHIKUMAR\OneDrive\cursor repo\hired-ai-working\public\ai_datasets\Amazon datasets
+C:\Users\THUTHIKUMAR\OneDrive\cursor repo\hired-ai-working\public\ai_datasets\Linkedin_datasets
+C:\Users\THUTHIKUMAR\OneDrive\cursor repo\hired-ai-working\public\ai_datasets\Amazon datasets\Amazon datasets
+C:\Users\THUTHIKUMAR\OneDrive\cursor repo\hired-ai-working\public\ai_datasets\Amazon datasets\Amazon datasets\Google datasets
+C:\Users\THUTHIKUMAR\OneDrive\cursor repo\hired-ai-working\public\ai_datasets\Amazon datasets\Amazon datasets\Google datasets\Software Questions.csv

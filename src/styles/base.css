@@ -1,0 +1,223 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Base colors - Clean White Design */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  
+  /* Brand colors - Modern palette */
+  --primary: 248 84% 67%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222.2 84% 4.9%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 270 80% 70%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 248 84% 67%;
+  --radius: 1rem;
+  
+  /* Sidebar */
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+  
+  /* Enhanced Brand Colors - Perfect Visibility */
+  --lavender: 248 84% 67%;
+  --lavender-foreground: 0 0% 100%;
+  --sage: 162 45% 45%;
+  --sage-foreground: 0 0% 100%;
+  --coral: 9 100% 68%;
+  --coral-foreground: 0 0% 100%;
+
+  /* Animation and gradient colors - Enhanced */
+  --gradient-primary: linear-gradient(135deg, hsl(var(--lavender)), hsl(var(--sage)));
+  --gradient-secondary: linear-gradient(135deg, hsl(var(--sage)), hsl(var(--coral)));
+  --gradient-accent: linear-gradient(135deg, hsl(var(--coral)), hsl(var(--lavender)));
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+  --gradient-glass-dark: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  --glow-primary: 0 0 20px hsl(var(--lavender) / 0.3);
+  --glow-secondary: 0 0 20px hsl(var(--sage) / 0.3);
+  --glow-accent: 0 0 20px hsl(var(--coral) / 0.3);
+  --shimmer: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+  --neumorphic-light: 8px 8px 16px rgba(174, 174, 192, 0.2), -8px -8px 16px rgba(255, 255, 255, 0.8);
+  --neumorphic-dark: 8px 8px 16px rgba(0, 0, 0, 0.3), -8px -8px 16px rgba(255, 255, 255, 0.02);
+}
+
+.dark {
+  /* Base colors - Deep Navy Design */
+  --background: 222 47% 7%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 47% 9%;
+  --popover-foreground: 210 40% 98%;
+  
+  /* Brand colors - Dark mode optimized */
+  --primary: 248 84% 67%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 270 80% 70%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 248 84% 67%;
+  
+  /* Sidebar - Dark */
+  --sidebar-background: 222 47% 6%;
+  --sidebar-foreground: 240 4.8% 95.9%;
+  --sidebar-primary: 248 84% 67%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 217.2 32.6% 15%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 217.2 32.6% 15%;
+  --sidebar-ring: 248 84% 67%;
+  
+  /* Enhanced Brand Colors - Dark mode (Brighter for visibility) */
+  --lavender: 248 84% 72%;
+  --lavender-foreground: 222 47% 7%;
+  --sage: 162 50% 55%;
+  --sage-foreground: 222 47% 7%;
+  --coral: 9 100% 70%;
+  --coral-foreground: 222 47% 7%;
+}
+
+* {
+  @apply border-border;
+  font-feature-settings: "cv11", "ss01";
+}
+
+/* Global theme transition styles */
+* {
+  transition: background-color 300ms ease-in-out, 
+              border-color 300ms ease-in-out, 
+              color 300ms ease-in-out,
+              box-shadow 300ms ease-in-out;
+}
+
+/* Ensure smooth transitions for all theme-related properties */
+html {
+  transition: background-color 300ms ease-in-out;
+}
+
+body {
+  @apply bg-background text-foreground font-poppins;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+/* Ensure all headings inherit proper colors */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-poppins font-semibold text-foreground;
+}
+
+/* Ensure paragraphs inherit proper colors */
+p {
+  @apply text-foreground;
+}
+
+/* Ensure links inherit proper colors */
+a {
+  @apply text-foreground;
+}
+
+/* Dark mode specific overrides */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  @apply text-gray-100;
+}
+
+.dark p {
+  @apply text-gray-300;
+}
+
+.dark a {
+  @apply text-gray-100;
+}
+
+/* Ensure all text elements are theme-aware */
+.dark span, .dark div, .dark label {
+  @apply text-gray-300;
+}
+
+/* Dark mode for specific elements that might have hardcoded colors */
+.dark .text-black {
+  @apply text-gray-100;
+}
+
+.dark .text-gray-900 {
+  @apply text-gray-100;
+}
+
+.dark .bg-white {
+  @apply bg-gray-800;
+}
+
+.dark .bg-gray-50 {
+  @apply bg-gray-900;
+}
+
+.dark .bg-gray-100 {
+  @apply bg-gray-800;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/20 rounded-full transition-colors hover:bg-muted-foreground/40;
+}
+
+/* Selection style */
+::selection {
+  @apply bg-primary/20 text-primary;
+}
+
+/* Focus style */
+*:focus-visible {
+  @apply outline-none ring-2 ring-primary/30 ring-offset-2 ring-offset-background transition-all;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-poppins font-semibold;
+}
+
+.font-display {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}

@@ -1,0 +1,123 @@
+[
+    {
+      "module_id": 1,
+      "module_name": "AWS Developer Basics",
+      "topic_title": "Introduction to AWS",
+      "content_summary": "Overview of AWS services, global infrastructure, and developer tools.",
+      "code_example": "# AWS CLI Setup\naws configure\naws s3 ls",
+      "difficulty": "Beginner"
+    },
+    {
+      "module_id": 2,
+      "module_name": "AWS Developer Basics",
+      "topic_title": "Identity and Access Management (IAM)",
+      "content_summary": "Understanding IAM users, groups, roles, and policies for secure access control.",
+      "code_example": "# Create IAM User\naws iam create-user --user-name dev-user",
+      "difficulty": "Beginner"
+    },
+    {
+      "module_id": 3,
+      "module_name": "Compute Services",
+      "topic_title": "EC2 Instances",
+      "content_summary": "Learn how to launch and manage EC2 instances for scalable compute.",
+      "code_example": "# Launch EC2 Instance\naws ec2 run-instances --image-id ami-0abcdef1234567890 --instance-type t2.micro",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 4,
+      "module_name": "Compute Services",
+      "topic_title": "Lambda Functions",
+      "content_summary": "Build serverless functions using AWS Lambda and deploy automatically.",
+      "code_example": "import json\n\ndef handler(event, context):\n    return { 'statusCode': 200, 'body': json.dumps('Hello from Lambda!') }",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 5,
+      "module_name": "Storage Services",
+      "topic_title": "Amazon S3",
+      "content_summary": "Learn how to store and retrieve objects in S3 buckets.",
+      "code_example": "# Create Bucket\naws s3 mb s3://hiredai-learning-data",
+      "difficulty": "Beginner"
+    },
+    {
+      "module_id": 6,
+      "module_name": "Database Services",
+      "topic_title": "DynamoDB",
+      "content_summary": "Understand how to use DynamoDB for NoSQL data storage and querying.",
+      "code_example": "# Create Table\naws dynamodb create-table --table-name Users --key-schema AttributeName=UserId,KeyType=HASH",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 7,
+      "module_name": "API Integration",
+      "topic_title": "API Gateway",
+      "content_summary": "Build and deploy REST APIs using API Gateway with Lambda integrations.",
+      "code_example": "# Deploy API\naws apigateway create-rest-api --name 'HiredAI API'",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 8,
+      "module_name": "Messaging Services",
+      "topic_title": "SNS and SQS",
+      "content_summary": "Implement asynchronous communication using SNS and SQS queues.",
+      "code_example": "# Publish SNS Message\naws sns publish --topic-arn arn:aws:sns:us-east-1:123456789012:MyTopic --message 'Hello World!'",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 9,
+      "module_name": "Monitoring and Logging",
+      "topic_title": "CloudWatch and X-Ray",
+      "content_summary": "Learn how to monitor application metrics and trace requests.",
+      "code_example": "# Create Log Group\naws logs create-log-group --log-group-name hiredai-dev-logs",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 10,
+      "module_name": "Infrastructure as Code",
+      "topic_title": "CloudFormation",
+      "content_summary": "Automate AWS resource creation using YAML/JSON templates.",
+      "code_example": "Resources:\n  MyBucket:\n    Type: AWS::S3::Bucket\n    Properties:\n      BucketName: hiredai-cloud-bucket",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 11,
+      "module_name": "Application Deployment",
+      "topic_title": "AWS Elastic Beanstalk",
+      "content_summary": "Deploy scalable web apps using Beanstalk environments.",
+      "code_example": "# Deploy App\neb init && eb create hiredai-env && eb deploy",
+      "difficulty": "Intermediate"
+    },
+    {
+      "module_id": 12,
+      "module_name": "Containerization",
+      "topic_title": "ECS and ECR",
+      "content_summary": "Learn to build and deploy containers using ECS and ECR.",
+      "code_example": "# Build Docker Image\ndocker build -t hiredai-app .\n# Push to ECR\naws ecr create-repository --repository-name hiredai-app",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 13,
+      "module_name": "Security and Encryption",
+      "topic_title": "KMS and Secrets Manager",
+      "content_summary": "Securely manage secrets, API keys, and encryption.",
+      "code_example": "# Encrypt Data\naws kms encrypt --key-id alias/my-key --plaintext fileb://data.txt",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 14,
+      "module_name": "Automation",
+      "topic_title": "CodeBuild and CodePipeline",
+      "content_summary": "Automate CI/CD workflows for AWS deployments.",
+      "code_example": "# Create Pipeline\naws codepipeline create-pipeline --cli-input-json file://pipeline.json",
+      "difficulty": "Advanced"
+    },
+    {
+      "module_id": 15,
+      "module_name": "Best Practices",
+      "topic_title": "Cost Optimization",
+      "content_summary": "Learn how to monitor and optimize AWS costs effectively.",
+      "code_example": "# Cost Explorer\naws ce get-cost-and-usage --time-period Start=2025-10-01,End=2025-10-31",
+      "difficulty": "Intermediate"
+    }
+  ]
+  

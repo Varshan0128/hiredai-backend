@@ -1,0 +1,1002 @@
+/* Global Template Variables */
+:root {
+  --template-primary: #2563eb;
+  --template-secondary: #1d4ed8;
+}
+
+/* Classic Chronological Template */
+.classic-chronological {
+  font-family: Georgia, serif;
+  line-height: 1.6;
+  color: #333;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+}
+
+.classic-chronological .resume-header {
+  text-align: center;
+  border-bottom: 2px solid var(--template-primary);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.classic-chronological h1 {
+  font-size: 2rem;
+  color: var(--template-primary);
+  margin-bottom: 0.5rem;
+}
+
+.classic-chronological .contact-info {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.classic-chronological h2 {
+  color: var(--template-primary);
+  font-size: 1.2rem;
+  margin: 1.5rem 0 0.75rem 0;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.classic-chronological .job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.classic-chronological .company-date {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.classic-chronological .skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.classic-chronological .skill-item {
+  background: #f8f9fa;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+/* Modern Professional Template */
+.modern-professional {
+  font-family: Inter, sans-serif;
+  line-height: 1.5;
+  color: #2d3748;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+}
+
+.modern-professional .modern-header {
+  background: linear-gradient(135deg, var(--template-primary), var(--template-secondary));
+  color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.modern-professional h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.modern-professional .contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Elegant Minimalist Template */
+.elegant-minimalist {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #333;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.4;
+}
+
+.elegant-minimalist header {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.elegant-minimalist h1 {
+  font-size: 2rem;
+  color: var(--template-primary);
+  margin-bottom: 0.25rem;
+}
+
+.elegant-minimalist .contact-line {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.elegant-minimalist h2 {
+  font-size: 1.1rem;
+  color: var(--template-primary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.2rem;
+}
+
+.elegant-minimalist .experience-entry,
+.elegant-minimalist .education-entry {
+  margin-bottom: 1rem;
+}
+
+.elegant-minimalist .job-line,
+.elegant-minimalist .edu-line {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 0.3rem;
+}
+
+.elegant-minimalist .position,
+.elegant-minimalist .degree {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.elegant-minimalist .company,
+.elegant-minimalist .institution {
+  font-style: italic;
+  margin-right: 0.5rem;
+}
+
+.elegant-minimalist .dates {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.elegant-minimalist .skills-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Corporate Clean Template */
+.corporate-clean {
+  font-family: Arial, sans-serif;
+  color: #333;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.5;
+}
+
+.corporate-clean .corporate-header {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.corporate-clean h1 {
+  font-size: 2rem;
+  color: var(--template-primary);
+  margin-bottom: 0.5rem;
+}
+
+.corporate-clean .contact-section {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.corporate-clean .contact-row {
+  margin-bottom: 0.2rem;
+}
+
+.corporate-clean h2 {
+  font-size: 1.2rem;
+  color: var(--template-primary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.25rem;
+}
+
+.corporate-clean .job-entry,
+.corporate-clean .edu-entry {
+  margin-bottom: 1.2rem;
+}
+
+.corporate-clean .job-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.4rem;
+}
+
+.corporate-clean .job-title-company h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.corporate-clean .job-title-company h4 {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.corporate-clean .job-dates {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.corporate-clean .achievements-section {
+  margin-top: 0.5rem;
+}
+
+.corporate-clean .achievements-section h5 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.corporate-clean .competencies-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.corporate-clean .competency-item {
+  background-color: #eef2ff;
+  color: var(--template-primary);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+/* Harvard Template */
+.harvard-template {
+  font-family: "Times New Roman", Times, serif;
+  color: #000;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.5;
+}
+
+.harvard-template .academic-header {
+  border-bottom: 2px solid var(--template-primary);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.2rem;
+}
+
+.harvard-template h1 {
+  font-size: 2.2rem;
+  color: var(--template-primary);
+  margin-bottom: 0.3rem;
+}
+
+.harvard-template .academic-contact {
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.harvard-template h2 {
+  font-size: 1.3rem;
+  color: var(--template-primary);
+  margin-top: 1.4rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.2rem;
+}
+
+.harvard-template .position-entry,
+.harvard-template .degree-entry {
+  margin-bottom: 1.1rem;
+}
+
+.harvard-template h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.harvard-template .organization-date,
+.harvard-template .institution-date {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.harvard-template .skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.harvard-template .skill-item {
+  background-color: #f0f0f0;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.85rem;
+}
+
+/* Stanford Template */
+.stanford-template {
+  font-family: "Source Sans Pro", sans-serif;
+  color: #333;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.55;
+}
+
+.stanford-template .innovation-header {
+  background-color: #f9f9f9;
+  padding: 1.2rem;
+  margin-bottom: 1.6rem;
+}
+
+.stanford-template h1 {
+  font-size: 2.3rem;
+  color: var(--template-primary);
+  margin-bottom: 0.4rem;
+}
+
+.stanford-template .contact-info-modern {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.stanford-template h2 {
+  font-size: 1.4rem;
+  color: var(--template-primary);
+  margin-top: 1.6rem;
+  margin-bottom: 0.7rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.3rem;
+}
+
+.stanford-template .role-entry,
+.stanford-template .academic-entry {
+  margin-bottom: 1.3rem;
+}
+
+.stanford-template h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.25rem;
+}
+
+.stanford-template .org-date,
+.stanford-template .school-date {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.stanford-template .expertise-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.stanford-template .expertise-item {
+  background-color: #e9ecef;
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
+}
+
+/* Cambridge Template */
+.cambridge-template {
+  font-family: Garamond, serif;
+  color: #222;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.6;
+}
+
+.cambridge-template .distinguished-header {
+  border-bottom: 2px solid var(--template-primary);
+  padding-bottom: 0.8rem;
+  margin-bottom: 1.4rem;
+}
+
+.cambridge-template h1 {
+  font-size: 2.4rem;
+  color: var(--template-primary);
+  margin-bottom: 0.35rem;
+}
+
+.cambridge-template .classical-contact {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.cambridge-template h2 {
+  font-size: 1.5rem;
+  color: var(--template-primary);
+  margin-top: 1.7rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.35rem;
+}
+
+.cambridge-template .appointment-entry,
+.cambridge-template .qualification-entry {
+  margin-bottom: 1.4rem;
+}
+
+.cambridge-template h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.cambridge-template .appointment-details,
+.cambridge-template .institution-period {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.cambridge-template .competencies-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cambridge-template .competency {
+  background-color: #f2f2f2;
+  padding: 0.3rem 0.6rem;
+  border-radius: 16px;
+  font-size: 0.9rem;
+}
+
+/* Oxford Template */
+.oxford-template {
+  font-family: "Times New Roman", Times, serif;
+  color: #111;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.6;
+}
+
+.oxford-template .prestigious-header {
+  border-bottom: 2px solid var(--template-primary);
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.oxford-template h1 {
+  font-size: 2.5rem;
+  color: var(--template-primary);
+  margin-bottom: 0.4rem;
+}
+
+.oxford-template .refined-contact {
+  font-size: 1rem;
+  color: #333;
+}
+
+.oxford-template h2 {
+  font-size: 1.6rem;
+  color: var(--template-primary);
+  margin-top: 1.8rem;
+  margin-bottom: 0.9rem;
+  border-bottom: 1px solid #bbb;
+  padding-bottom: 0.4rem;
+}
+
+.oxford-template .appointment,
+.oxford-template .academic-qualification {
+  margin-bottom: 1.5rem;
+}
+
+.oxford-template h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.oxford-template .organization,
+.oxford-template .alma-mater {
+  font-style: italic;
+  font-size: 1rem;
+  color: #444;
+}
+
+.oxford-template .expertise-listing {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.oxford-template .expertise-area {
+  background-color: #f0f0f0;
+  padding: 0.35rem 0.7rem;
+  border-radius: 17px;
+  font-size: 0.95rem;
+}
+
+/* New York Template */
+.new-york-template {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #222;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.5;
+}
+
+.new-york-template .metro-header {
+  background-color: #f8f8f8;
+  padding: 1.3rem;
+  margin-bottom: 1.7rem;
+}
+
+.new-york-template h1 {
+  font-size: 2.6rem;
+  color: var(--template-primary);
+  margin-bottom: 0.45rem;
+}
+
+.new-york-template .dynamic-contact {
+  font-size: 1.05rem;
+  color: #333;
+}
+
+.new-york-template h2 {
+  font-size: 1.7rem;
+  color: var(--template-primary);
+  margin-top: 1.9rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #aaa;
+  padding-bottom: 0.45rem;
+}
+
+.new-york-template .job-block,
+.new-york-template .edu-block {
+  margin-bottom: 1.6rem;
+}
+
+.new-york-template h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+
+.new-york-template h4 {
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #444;
+}
+
+.new-york-template .skills-metro {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.new-york-template .skill-badge {
+  background-color: #e9ecef;
+  padding: 0.4rem 0.8rem;
+  border-radius: 18px;
+  font-size: 1rem;
+}
+
+/* Chicago Professional Template */
+.chicago-professional {
+  font-family: Arial, sans-serif;
+  color: #222;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.5;
+}
+
+.chicago-professional .structured-header {
+  background-color: #f9f9f9;
+  padding: 1.4rem;
+  margin-bottom: 1.8rem;
+}
+
+.chicago-professional h1 {
+  font-size: 2.7rem;
+  color: var(--template-primary);
+  margin-bottom: 0.5rem;
+}
+
+.chicago-professional .contact-structured {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.chicago-professional h2 {
+  font-size: 1.8rem;
+  color: var(--template-primary);
+  margin-top: 2rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid #999;
+  padding-bottom: 0.5rem;
+}
+
+.chicago-professional .employment-record,
+.chicago-professional .education-record {
+  margin-bottom: 1.7rem;
+}
+
+.chicago-professional h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.45rem;
+}
+
+.chicago-professional h4 {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.chicago-professional .qualifications-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.chicago-professional .qualification-item {
+  background-color: #e9ecef;
+  padding: 0.5rem 0.9rem;
+  border-radius: 19px;
+  font-size: 1.1rem;
+}
+
+/* Berlin Creative Template */
+.berlin-creative {
+  font-family: "Source Sans Pro", sans-serif;
+  color: #222;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.55;
+}
+
+.berlin-creative .creative-header {
+  background-color: #f8f8f8;
+  padding: 1.5rem;
+  margin-bottom: 1.9rem;
+}
+
+.berlin-creative h1 {
+  font-size: 2.8rem;
+  color: var(--template-primary);
+  margin-bottom: 0.55rem;
+}
+
+.berlin-creative .contact-creative {
+  font-size: 1.15rem;
+  color: #333;
+}
+
+.berlin-creative h2 {
+  font-size: 1.9rem;
+  color: var(--template-primary);
+  margin-top: 2.1rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid #888;
+  padding-bottom: 0.55rem;
+}
+
+.berlin-creative .journey-milestone,
+.berlin-creative .learning-milestone {
+  margin-bottom: 1.8rem;
+}
+
+.berlin-creative h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.berlin-creative .company-creative,
+.berlin-creative .institution-creative {
+  font-style: italic;
+  font-size: 1.15rem;
+  color: #444;
+}
+
+.berlin-creative .capabilities-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.berlin-creative .capability-tag {
+  background-color: #e9ecef;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  font-size: 1.2rem;
+}
+
+/* London Corporate Template */
+.london-corporate {
+  font-family: "Times New Roman", Times, serif;
+  color: #111;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.6;
+}
+
+.london-corporate .corporate-british-header {
+  background-color: #f7f7f7;
+  padding: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.london-corporate h1 {
+  font-size: 2.9rem;
+  color: var(--template-primary);
+  margin-bottom: 0.6rem;
+}
+
+.london-corporate .contact-refined {
+  font-size: 1.2rem;
+  color: #222;
+}
+
+.london-corporate h2 {
+  font-size: 2rem;
+  color: var(--template-primary);
+  margin-top: 2.2rem;
+  margin-bottom: 1.3rem;
+  border-bottom: 1px solid #777;
+  padding-bottom: 0.6rem;
+}
+
+.london-corporate .position-corporate,
+.london-corporate .academic-record {
+  margin-bottom: 1.9rem;
+}
+
+.london-corporate h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.55rem;
+}
+
+.london-corporate h4 {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.london-corporate .competencies-corporate {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.london-corporate .competency-british {
+  background-color: #e9ecef;
+  padding: 0.7rem 1.1rem;
+  border-radius: 21px;
+  font-size: 1.3rem;
+}
+
+/* Paris Minimal Template */
+.paris-minimal {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #111;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.5;
+}
+
+.paris-minimal .minimal-elegant {
+  background-color: #f6f6f6;
+  padding: 1.7rem;
+  margin-bottom: 2.1rem;
+}
+
+.paris-minimal h1 {
+  font-size: 3rem;
+  color: var(--template-primary);
+  margin-bottom: 0.7rem;
+}
+
+.paris-minimal .contact-minimal {
+  font-size: 1.25rem;
+  color: #222;
+}
+
+.paris-minimal h2 {
+  font-size: 2.1rem;
+  color: var(--template-primary);
+  margin-top: 2.3rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid #666;
+  padding-bottom: 0.7rem;
+}
+
+.paris-minimal .experience-minimal,
+.paris-minimal .education-minimal {
+  margin-bottom: 2rem;
+}
+
+.paris-minimal h3 {
+  font-size: 1.7rem;
+  margin-bottom: 0.6rem;
+}
+
+.paris-minimal .company-period,
+.paris-minimal .institution-period {
+  font-style: italic;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.paris-minimal .skills-minimal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+}
+
+.paris-minimal .skill-french {
+  background-color: #e9ecef;
+  padding: 0.8rem 1.2rem;
+  border-radius: 22px;
+  font-size: 1.4rem;
+}
+
+/* Toronto Clean Template */
+.toronto-clean {
+  font-family: "Open Sans", sans-serif;
+  color: #111;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.5;
+}
+
+.toronto-clean .clean-canadian {
+  background-color: #f5f5f5;
+  padding: 1.8rem;
+  margin-bottom: 2.2rem;
+}
+
+.toronto-clean h1 {
+  font-size: 3.1rem;
+  color: var(--template-primary);
+  margin-bottom: 0.8rem;
+}
+
+.toronto-clean .contact-clean {
+  font-size: 1.3rem;
+  color: #222;
+}
+
+.toronto-clean h2 {
+  font-size: 2.2rem;
+  color: var(--template-primary);
+  margin-top: 2.4rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #555;
+  padding-bottom: 0.8rem;
+}
+
+.toronto-clean .job-clean,
+.toronto-clean .edu-clean {
+  margin-bottom: 2.1rem;
+}
+
+.toronto-clean h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.7rem;
+}
+
+.toronto-clean h4 {
+  font-style: italic;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.toronto-clean .skills-canadian {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.toronto-clean .skill-clean {
+  background-color: #e9ecef;
+  padding: 0.9rem 1.3rem;
+  border-radius: 23px;
+  font-size: 1.5rem;
+}
+
+/* Sydney Modern Template */
+.sydney-modern {
+  font-family: "Source Sans Pro", sans-serif;
+  color: #111;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0.75in;
+  line-height: 1.55;
+}
+
+.sydney-modern .modern-australian {
+  background-color: #f4f4f4;
+  padding: 1.9rem;
+  margin-bottom: 2.3rem;
+}
+
+.sydney-modern h1 {
+  font-size: 3.2rem;
+  color: var(--template-primary);
+  margin-bottom: 0.9rem;
+}
+
+.sydney-modern .contact-modern {
+  font-size: 1.35rem;
+  color: #222;
+}
+
+.sydney-modern h2 {
+  font-size: 2.3rem;
+  color: var(--template-primary);
+  margin-top: 2.5rem;
+  margin-bottom: 1.6rem;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.9rem;
+}
+
+.sydney-modern .role-modern,
+.sydney-modern .qualification-modern {
+  margin-bottom: 2.2rem;
+}
+
+.sydney-modern h3 {
+  font-size: 1.9rem;
+  margin-bottom: 0.8rem;
+}
+
+.sydney-modern .company-modern,
+.sydney-modern .institution-modern {
+  font-style: italic;
+  font-size: 1.35rem;
+  color: #333;
+}
+
+.sydney-modern .expertise-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.3rem;
+}
+
+.sydney-modern .expertise-tag {
+  background-color: #e9ecef;
+  padding: 1rem 1.4rem;
+  border-radius: 24px;
+  font-size: 1.6rem;
+}
+
+/* Print styles */
+@media print {
+  .classic-chronological,
+  .modern-professional,
+  .elegant-minimalist,
+  .corporate-clean,
+  .harvard-template,
+  .stanford-template,
+  .cambridge-template,
+  .oxford-template,
+  .new-york-template,
+  .chicago-professional,
+  .berlin-creative,
+  .london-corporate,
+  .paris-minimal,
+  .toronto-clean,
+  .sydney-modern {
+    padding: 0.5in;
+    font-size: 11pt;
+  }
+}
