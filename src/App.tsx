@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+// src/App.tsx
+import React, { useEffect, useRef, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+
 // Pages
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
@@ -19,79 +21,145 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { getBackendStatus } from "./services/api";
 import type { BackendStatus } from "./services/api";
 
-if (process.env.NODE_ENV === "development") {
-  const originalWarn = console.warn;
-  console.warn = (...args) => {
-    const msg = args.join(" ");
-    if (
-      msg.includes("React Router Future Flag Warning") ||
-      msg.includes("v7_startTransition") ||
-      msg.includes("v7_relativeSplatPath")
-    ) {
-      return;
-    }
-    originalWarn(...args);
-  };
+const DEFAULT_POLL_INTERVAL_MS = (() => {
+  const raw = (import.meta as any).env?.VITE_STATUS_POLL_INTERVAL;
+  const n = Number(raw);
+  return Number.isFinite(n) && n > 0 ? n : 0;
+})();
+
+async function fetchHealthDirect(timeoutMs = 5000): Promise<BackendStatus> {
+  const backendBase =
+    (import.meta as any).env?.VITE_API_BASE_URL || "http://localhost:8000/api";
+  const url = `${backendBase.replace(/\/+$/, "")}/health`;
+
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const res = await fetch(url, { signal: controller.signal });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    return json as BackendStatus;
+  } finally {
+    clearTimeout(id);
+  }
 }
 
-function App() {
-  const [backendStatus, setBackendStatus] = useState<BackendStatus | null>(null);
-  const [statusLoading, setStatusLoading] = useState(true);
-  const [statusError, setStatusError] = useState<string | null>(null);
+function useBackendStatus() {
+  const mounted = useRef(true);
+  const [status, setStatus] = useState<BackendStatus | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    let mounted = true;
-    setStatusLoading(true);
-    getBackendStatus()
-      .then((data) => {
-        if (!mounted) return;
-        setBackendStatus(data ?? null);
-        setStatusError(null);
-      })
-      .catch((err: any) => {
-        if (!mounted) return;
-        console.error("Backend status check failed:", err);
-        setBackendStatus(null);
-        setStatusError(err?.message ? String(err.message) : "Backend not reachable");
-      })
-      .finally(() => {
-        if (!mounted) return;
-        setStatusLoading(false);
-      });
+  const load = async () => {
+    setLoading(true);
+    setError(null);
 
-    // optional: poll every X seconds (disabled by default)
-    // const id = setInterval(() => { /* call getBackendStatus again */ }, 30_000);
-
-    return () => {
-      mounted = false;
-      // clearInterval(id);
-    };
-  }, []);
-
-  const renderStatus = () => {
-    if (statusLoading) return <span>Checking backend…</span>;
-    if (statusError)
-      return (
-        <span style={{ color: "#ff6b6b" }}>
-          Backend unreachable ({statusError})
-        </span>
-      );
-
-    return (
-      <span style={{ color: "#4ade80" }}>
-        ✅ {backendStatus?.message ?? "Backend running"}
-        {backendStatus?.version ? ` — v${backendStatus.version}` : ""}
-      </span>
-    );
+    try {
+      // Primary attempt: use service helper (if it exists).
+      const data = await getBackendStatus();
+      if (!mounted.current) return;
+      setStatus(data ?? null);
+      setError(null);
+      return;
+    } catch (err) {
+      // fallback to direct fetch if the service layer fails (network / build-time mismatch)
+      try {
+        const direct = await fetchHealthDirect();
+        if (!mounted.current) return;
+        setStatus(direct);
+        setError(null);
+        return;
+      } catch (err2: any) {
+        if (!mounted.current) return;
+        const msg =
+          err2?.message ??
+          (err instanceof Error ? err.message : "Backend not reachable");
+        setStatus(null);
+        setError(String(msg));
+        return;
+      }
+    } finally {
+      if (mounted.current) setLoading(false);
+    }
   };
 
+  useEffect(() => {
+    mounted.current = true;
+    load();
+
+    let intervalId: number | undefined;
+    if (DEFAULT_POLL_INTERVAL_MS > 0) {
+      intervalId = window.setInterval(() => {
+        load().catch(() => {});
+      }, DEFAULT_POLL_INTERVAL_MS);
+    }
+
+    return () => {
+      mounted.current = false;
+      if (intervalId) clearInterval(intervalId);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // run once on mount
+
+  return { status, loading, error, reload: load };
+}
+
+function StatusPill({
+  loading,
+  error,
+  status,
+  onRetry,
+}: {
+  loading: boolean;
+  error: string | null;
+  status: BackendStatus | null;
+  onRetry: () => void;
+}) {
+  if (loading) {
+    return <span>Checking backend…</span>;
+  }
+  if (error) {
+    return (
+      <span style={{ color: "#ff6b6b", display: "inline-flex", gap: 8, alignItems: "center" }}>
+        Backend unreachable ({error})
+        <button
+          onClick={onRetry}
+          style={{
+            marginLeft: 8,
+            background: "#111827",
+            color: "white",
+            borderRadius: 6,
+            padding: "4px 8px",
+            border: "none",
+            cursor: "pointer",
+            fontSize: 12,
+          }}
+        >
+          Retry
+        </button>
+      </span>
+    );
+  }
+
   return (
-    <div className="App">
-      {/* Small top status bar — adjust styling as needed for your app */}
+    <span style={{ color: "#4ade80" }}>
+      ✅ {status?.message ?? "Backend running"}
+      {status?.version ? ` — v${status.version}` : ""}
+    </span>
+  );
+}
+
+export default function App() {
+  const { status, loading, error, reload } = useBackendStatus();
+
+  return (
+    <div className="App" style={{ minHeight: "100vh", background: "#fff" }}>
+      {/* Top status bar */}
       <div
         style={{
           width: "100%",
-          padding: "6px 12px",
+          padding: "8px 14px",
           background: "#0f172a",
           color: "#e6eef8",
           display: "flex",
@@ -102,12 +170,13 @@ function App() {
       >
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <strong style={{ color: "#cbd5e1" }}>Hired AI</strong>
-          <span style={{ opacity: 0.7 }}>{renderStatus()}</span>
+          <div style={{ opacity: 0.95 }}>
+            <StatusPill loading={loading} error={error} status={status} onRetry={() => reload()} />
+          </div>
         </div>
 
-        <div style={{ opacity: 0.65, fontSize: 12 }}>
-          {/* You can add quick links / environment name here */}
-          {process.env.NODE_ENV === "development" ? "dev" : "prod"}
+        <div style={{ opacity: 0.75, fontSize: 12 }}>
+          {(import.meta as any).env?.VITE_API_BASE_URL ? "prod" : process.env.NODE_ENV === "development" ? "dev" : "prod"}
         </div>
       </div>
 
@@ -184,5 +253,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
