@@ -59,6 +59,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# --- Handle OPTIONS preflight safely ---
+from fastapi.responses import Response
+
+@app.options("/{rest_of_path:path}")
+async def preflight_handler(rest_of_path: str):
+    """
+    Handles automatic preflight OPTIONS requests for any path.
+    This prevents FastAPI from returning 400 on preflights.
+    """
+    return Response(status_code=200)
+# --- end preflight handler ---
+
 
 # Simple request logging middleware to show incoming paths and response status
 @app.middleware("http")
