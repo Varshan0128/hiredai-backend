@@ -7,9 +7,9 @@ import PsychologyTest from '@/components/psychology/PsychologyTest';
 import TestResults from '@/components/psychology/TestResults';
 import { motion } from 'framer-motion';
 import { BookOpen, Code, Brain, Loader2 } from 'lucide-react';
-import { getBackendBase } from '@/utils/getBackendBase';
+import { getBackendBase } from '@/utils/getBackendBase'; // Assuming this correctly returns "http://localhost:8000"
 
-const API_BASE = getBackendBase() || "http://127.0.0.1:8000";
+const API_BASE = getBackendBase() || "http://127.0.0.1:8000"; // Fallback in case getBackendBase is null/undefined
 
 const LearningPath: React.FC = () => {
   const navigate = useNavigate();
@@ -27,18 +27,52 @@ const LearningPath: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`${API_BASE}/check-data`);
+        const checkDataUrl = `${API_BASE}/api/check-data`; // Define URL explicitly
+        console.log("Attempting GET to check-data:", checkDataUrl); // Log the exact URL for check-data
+
+        const res = await fetch(checkDataUrl, {
+          method: "GET",
+          headers: { "Accept": "application/json" },
+        });
+
+        // --- IMPORTANT: Check if response is OK and is JSON before parsing ---
+        if (!res.ok) {
+          const errorText = await res.text();
+          console.error("Backend /api/check-data response was not OK:", res.status, res.statusText, errorText);
+          // Try to parse as JSON anyway, if it's not HTML, to get more info
+          try {
+            const errorJson = JSON.parse(errorText);
+            console.error("Backend /api/check-data error JSON:", errorJson);
+          } catch (jsonError) {
+            console.error("Backend /api/check-data error text (not JSON):", errorText);
+          }
+          throw new Error(`Failed to load datasets: ${res.status} ${res.statusText}`);
+        }
+
+        // Check content type explicitly
+        const contentType = res.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            const rawResponse = await res.text();
+            console.error("Backend /api/check-data did not return JSON. Content-Type:", contentType, "Raw Response:", rawResponse);
+            throw new Error("Expected JSON from /api/check-data but received non-JSON response.");
+        }
+
         const data = await res.json();
+        console.log("Successfully fetched /api/check-data data:", data); // Log success
 
         if (data && data.available_datasets) {
           setCourses(
             data.available_datasets
-              .filter((f: string) => f.endsWith('.csv'))
-              .map((f: string) => f.replace('_learning.csv', ''))
+              .filter((f: string) => !!f) // ensure non-empty
+              .map((f: string) => f.replace('_learning', '')) // Ensure consistency if backend cleaned partially
           );
+        } else {
+            console.warn("/api/check-data response did not contain 'available_datasets':", data);
         }
       } catch (error) {
-        console.error("Error loading datasets:", error);
+        console.error("Error loading datasets (catch block):", error);
+        // Optionally inform user
+        // alert(`Failed to load course list. Please check the backend server. Error: ${error}`);
       }
     };
     fetchData();
@@ -51,20 +85,36 @@ const LearningPath: React.FC = () => {
     if (storedResult) {
       setTestResult(storedResult);
       setLearningMode(storedResult.category || storedResult.user_category || null);
+      setShowResults(false); // Make sure results are hidden if test is completed and we're showing the main path
     }
-  }, []);
+  }, []); // Empty dependency array means this runs once on mount
 
   // 🧠 Submit answers → Get user category
   const handleTestComplete = async (answers: any) => {
     try {
-      const res = await fetch(`${API_BASE}/predict-learning-path/`, {
+      const fullUrl = `${API_BASE}/api/predict-learning-path`; // Build the full URL explicitly
+      console.log("Attempting POST to predict-learning-path:", fullUrl); // Log the exact URL being hit (for debugging)
+      const res = await fetch(fullUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify(answers),
       });
 
-      if (!res.ok) throw new Error("Failed to connect to backend");
+      if (!res.ok) {
+        const errorText = await res.text(); // Get more specific error from backend
+        console.error("Backend error response from predict-learning-path:", res.status, res.statusText, errorText);
+        throw new Error(`Failed to connect to backend: ${res.status} ${res.statusText} - ${errorText}`);
+      }
+
+      const contentType = res.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        const raw = await res.text();
+        console.error("predict-learning-path returned non-JSON:", contentType, raw);
+        throw new Error("Expected JSON from predict-learning-path but received non-JSON response.");
+      }
+
       const data = await res.json();
+      console.log("Successfully fetched predict-learning-path data:", data); // Log success
 
       const result = {
         category: data.user_category || "Unknown",
@@ -78,7 +128,7 @@ const LearningPath: React.FC = () => {
       localStorage.setItem('psychology_test_result', JSON.stringify(result));
     } catch (error) {
       console.error("Error in handleTestComplete:", error);
-      alert("Something went wrong while processing your test. Please try again.");
+      alert(`Something went wrong while processing your test: ${error}. Please try again.`);
     }
   };
 
@@ -97,6 +147,23 @@ const LearningPath: React.FC = () => {
     setShowResults(false);
     setTestResult(null);
     setLearningMode(null);
+    setCourses([]); // Clear courses to re-trigger fetchData if needed
+    setModules([]); // Clear modules
+    // Re-run the initial data fetch after reset
+    const fetchData = async () => {
+        try {
+            const checkDataUrl = `${API_BASE}/api/check-data`;
+            const res = await fetch(checkDataUrl, { headers: { "Accept": "application/json" } });
+            if (!res.ok) return;
+            const data = await res.json();
+            if (data && data.available_datasets) {
+                setCourses(data.available_datasets.filter((f: string) => !!f).map((f: string) => f.replace('_learning', '')));
+            }
+        } catch (error) {
+            console.error("Error re-loading datasets after reset:", error);
+        }
+    };
+    fetchData();
   };
 
   // 📚 Load course modules
@@ -107,21 +174,50 @@ const LearningPath: React.FC = () => {
     }
 
     setLoading(true);
+    setModules([]); // Clear previous modules before loading new ones
     try {
-      const res = await fetch(`${API_BASE}/learning-path/${courseName}?mode=${learningMode}`);
+      // make courseName safe for URL paths
+      const encodedCourse = encodeURIComponent(courseName);
+      const encodedMode = encodeURIComponent(learningMode);
+      const learningPathUrl = `${API_BASE}/api/learning-path/${encodedCourse}?mode=${encodedMode}`;
+      console.log("Attempting GET to learning-path:", learningPathUrl); // Log the exact URL for learning-path
+
+      const res = await fetch(learningPathUrl, {
+        method: "GET",
+        headers: { "Accept": "application/json" },
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error("Backend /api/learning-path response was not OK:", res.status, res.statusText, errorText);
+        throw new Error(`Failed to load learning path: ${res.status} ${res.statusText}`);
+      }
+
+      const contentType = res.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+          const rawResponse = await res.text();
+          console.error("Backend /api/learning-path did not return JSON. Content-Type:", contentType, "Raw Response:", rawResponse);
+          throw new Error("Expected JSON from /api/learning-path but received non-JSON response.");
+      }
+
+      // parse JSON safely
       const data = await res.json();
+      console.log("Successfully fetched /api/learning-path data:", data); // Log success
 
       if (data && data.content) {
         setModules(data.content);
         setSelectedCourse(courseName);
       } else {
         setModules([]);
+        console.warn("/api/learning-path response did not contain 'content':", data);
       }
     } catch (error) {
       console.error("Error loading learning path:", error);
-      setModules([]);
+      setModules([]); // Ensure modules are empty on error
+      // Optionally show an in-UI error to the user here
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   // 🧩 Step 1 — Psychology Test
@@ -173,28 +269,40 @@ const LearningPath: React.FC = () => {
         </div>
 
         {/* Course Selector */}
-        <div className="flex flex-wrap gap-3 mb-8">
-          {courses.map((course) => (
-            <motion.button
-              key={course}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => loadLearningPath(course)}
-              className={`px-5 py-3 rounded-xl font-semibold ${
-                selectedCourse === course
-                  ? "bg-purple-600 text-white"
-                  : "bg-gray-800 hover:bg-gray-700 text-gray-300"
-              }`}
-            >
-              {course.replace(/_/g, " ").toUpperCase()}
-            </motion.button>
-          ))}
-        </div>
-
-        {/* Loading */}
-        {loading && (
+        {loading && courses.length === 0 ? (
           <div className="flex justify-center mt-8">
             <Loader2 className="animate-spin text-purple-400" size={40} />
+            <p className="ml-2 text-gray-400">Loading courses...</p>
+          </div>
+        ) : (
+          <div className="flex flex-wrap gap-3 mb-8">
+            {courses.length > 0 ? (
+              courses.map((course) => (
+                <motion.button
+                  key={course}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => loadLearningPath(course)}
+                  className={`px-5 py-3 rounded-xl font-semibold ${
+                    selectedCourse === course
+                      ? "bg-purple-600 text-white"
+                      : "bg-gray-800 hover:bg-gray-700 text-gray-300"
+                  }`}
+                >
+                  {course.replace(/_/g, " ").toUpperCase()}
+                </motion.button>
+              ))
+            ) : (
+              <p className="text-center text-gray-400 w-full">No courses available. Check backend datasets.</p>
+            )}
+          </div>
+        )}
+
+        {/* Loading Modules Indicator */}
+        {loading && selectedCourse && modules.length === 0 && (
+          <div className="flex justify-center mt-8">
+            <Loader2 className="animate-spin text-purple-400" size={40} />
+            <p className="ml-2 text-gray-400">Loading modules for {selectedCourse.replace(/_/g, " ").toUpperCase()}...</p>
           </div>
         )}
 
@@ -232,7 +340,7 @@ const LearningPath: React.FC = () => {
 
         {!loading && !modules.length && selectedCourse && (
           <p className="text-center text-gray-400 mt-10">
-            No modules found for this course.
+            No modules found for this course or learning mode.
           </p>
         )}
       </main>
