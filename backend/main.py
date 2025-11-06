@@ -45,13 +45,14 @@ else:
 
 logger.info("Allowed CORS origins: %s", FRONTEND_ORIGINS)
 # allow any vercel preview hostname like https://<something>.vercel.app
-ALLOW_ORIGIN_REGEX = r"^https:\/\/[A-Za-z0-9-]+\.vercel\.app$"
+ALLOW_ORIGIN_REGEX = r"^https://([A-Za-z0-9-]+\.)?vercel\.app$"
 logger.info("Allowed CORS origin regex: %s", ALLOW_ORIGIN_REGEX)
 
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=FRONTEND_ORIGINS,
+     allow_origin_regex=ALLOW_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
