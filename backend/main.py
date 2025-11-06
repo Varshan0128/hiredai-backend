@@ -7,6 +7,8 @@ import urllib.parse
 from pathlib import Path
 import logging
 import time
+import re
+from fastapi.responses import Response
 
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -38,9 +40,14 @@ else:
         "http://127.0.0.1:8080",
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "https://hiredai-frontend-qdsonjees-kvarshan2007-5873s-projects.vercel.app",
     ]
 
 logger.info("Allowed CORS origins: %s", FRONTEND_ORIGINS)
+# allow any vercel preview hostname like https://<something>.vercel.app
+ALLOW_ORIGIN_REGEX = r"^https:\/\/[A-Za-z0-9-]+\.vercel\.app$"
+logger.info("Allowed CORS origin regex: %s", ALLOW_ORIGIN_REGEX)
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -49,6 +56,36 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# --- safe preflight OPTIONS handler ---
+_origin_re = re.compile(ALLOW_ORIGIN_REGEX)
+
+@app.options("/{rest_of_path:path}", include_in_schema=False)
+async def preflight_handler(rest_of_path: str, request: Request):
+    """
+    Handles automatic preflight OPTIONS requests for any path.
+    Returns Access-Control-Allow-* headers only when the Origin is allowed
+    (either in explicit FRONTEND_ORIGINS or matches the ALLOW_ORIGIN_REGEX).
+    """
+    origin = request.headers.get("origin")
+    logger.info("Preflight OPTIONS for %s from Origin=%s", rest_of_path, origin)
+
+    if not origin:
+        return Response(status_code=200)
+
+    if origin in FRONTEND_ORIGINS or _origin_re.match(origin):
+        headers = {
+            "Access-Control-Allow-Origin": origin,
+            "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+            "Access-Control-Allow-Headers": request.headers.get("access-control-request-headers", "*"),
+            "Access-Control-Allow-Credentials": "true",
+        }
+        return Response(status_code=200, headers=headers)
+
+    logger.warning("Blocked preflight from origin: %s", origin)
+    return Response(status_code=403, content="Origin not allowed")
+
 
 # Simple request logging middleware to show incoming paths and response status
 @app.middleware("http")
