@@ -43,13 +43,22 @@ else:
 
 logger.info("Allowed CORS origins: %s", FRONTEND_ORIGINS)
 
+# allow preview subdomains on vercel plus explicit origins above
+# NOTE: this keeps your explicit FRONTEND_ORIGINS but also allows
+# any subdomain ending with ".vercel.app" via regex (safe for preview).
+ALLOW_ORIGIN_REGEX = r"^https:\/\/.*\.vercel\.app$"
+
+logger.info("Allowed CORS origin regex: %s", ALLOW_ORIGIN_REGEX)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=FRONTEND_ORIGINS,
+    allow_origin_regex=ALLOW_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # Simple request logging middleware to show incoming paths and response status
 @app.middleware("http")
