@@ -20,7 +20,7 @@ export function getBackendBase(): string {
 
   // 3️⃣ Final fallback for local development
   // 🔥 Important: use localhost (not 127.0.0.1) to match CORS origins
-  return "http://localhost:8000";
+  return "https://hiredai-backend-1.onrender.com";
 }
 
 // Optional helper (used for Supabase admin route)
