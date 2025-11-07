@@ -105,50 +105,7 @@ function useBackendStatus() {
   return { status, loading, error, reload: load };
 }
 
-function StatusPill({
-  loading,
-  error,
-  status,
-  onRetry,
-}: {
-  loading: boolean;
-  error: string | null;
-  status: BackendStatus | null;
-  onRetry: () => void;
-}) {
-  if (loading) {
-    return <span>Checking backend…</span>;
-  }
-  if (error) {
-    return (
-      <span style={{ color: "#ff6b6b", display: "inline-flex", gap: 8, alignItems: "center" }}>
-        Backend unreachable ({error})
-        <button
-          onClick={onRetry}
-          style={{
-            marginLeft: 8,
-            background: "#111827",
-            color: "white",
-            borderRadius: 6,
-            padding: "4px 8px",
-            border: "none",
-            cursor: "pointer",
-            fontSize: 12,
-          }}
-        >
-          Retry
-        </button>
-      </span>
-    );
-  }
 
-  return (
-    <span style={{ color: "#4ade80" }}>
-      ✅ {status?.message ?? "Backend running"}
-      {status?.version ? ` — v${status.version}` : ""}
-    </span>
-  );
-}
 
 export default function App() {
   const { status, loading, error, reload } = useBackendStatus();
