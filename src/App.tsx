@@ -29,7 +29,7 @@ const DEFAULT_POLL_INTERVAL_MS = (() => {
 
 async function fetchHealthDirect(timeoutMs = 5000): Promise<BackendStatus> {
   const backendBase =
-    (import.meta as any).env?.VITE_API_BASE_URL || "http://localhost:8000/api";
+    (import.meta as any).env?.VITE_API_BASE_URL || "https://hiredai-backend-1.onrender.com/api";
   const url = `${backendBase.replace(/\/+$/, "")}/health`;
 
   const controller = new AbortController();
